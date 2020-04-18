@@ -1,18 +1,14 @@
 package com;
 
-
 import java.sql.Date;
 import java.text.SimpleDateFormat;
-
 
 //For REST Service
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
-
 //For JSON
 import com.google.gson.*;
-
 
 //For XML
 import org.jsoup.*;
@@ -21,11 +17,10 @@ import org.jsoup.nodes.Document;
 
 import model.OnlineAppointment;
 
-
 @Path("/Appointments")
 
 public class OnlineAppointmentService {
-	
+
 	OnlineAppointment App1 = new OnlineAppointment();
 
 	@GET
@@ -36,6 +31,21 @@ public class OnlineAppointmentService {
 		return App1.ReadAppointment();
 
 	}
+	
 
+	@POST
+	@Path("/")
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	@Produces(MediaType.TEXT_PLAIN)
+	public String addAppointment(
+			@FormParam("date") Date date,
+			@FormParam("time") String time,
+			@FormParam("apmnt_desc") String desc,
+			@FormParam("patient_id") int pid,
+			@FormParam("doctor_id") int did,
+			@FormParam("hospital_id") int hid) {
+		String output = App1.addAppointment(date, time, desc, pid, did, hid);
+		return output;
+	}
 
 }
