@@ -47,5 +47,24 @@ public class OnlineAppointmentService {
 		String output = App1.addAppointment(date, time, desc, pid, did, hid);
 		return output;
 	}
+	
+	
+	@PUT
+	@Path("/App1/{apmnt_id}/") 
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	@Produces(MediaType.TEXT_PLAIN)
+	public String UpdateAppointment(
+			
+			@FormParam("date") Date date, 
+			@FormParam("time") String time,
+			@FormParam("apmnt_desc") String desc,
+			@PathParam("apmnt_id") int AppID
+			) 
+	{
+		String output = App1.UpdateAppointment(date,time,desc,AppID);
+		System.out.println(AppID);
+		return output;
+	}
+
 
 }
