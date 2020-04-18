@@ -33,7 +33,8 @@ public class OnlineAppointmentService {
 	@Produces(MediaType.TEXT_HTML)
 	public String ReadAppointment() {
 
-		return "Hello";
+		return App1.ReadAppointment();
+
 	}
 
 
