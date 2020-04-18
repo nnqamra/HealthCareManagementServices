@@ -85,4 +85,25 @@ public class OnlineAppointment {
 		}
 	}
 
+	public String UpdateAppointment(Date date, String time, String desc, int AppID) {
+
+		try (Connection con = DBConnector.getConnection()) {
+
+			String updateAppQuery = "UPDATE appointment SET date=?,time=?,desc=? WHERE apmnt_id=?";
+			PreparedStatement pstmnt = con.prepareStatement(updateAppQuery);
+			pstmnt.setDate(1, date);
+			pstmnt.setString(2, time);
+			pstmnt.setString(3, desc);
+			pstmnt.setInt(4, AppID);
+
+			System.out.println(pstmnt.toString());
+			pstmnt.execute();
+			return "Appointment Updated successfully";
+
+		} catch (SQLException e) {
+			return "Error occured during Updating an Appointment\n" + e.getMessage();
+		}
+
+	}
+
 }
